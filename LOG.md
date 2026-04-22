@@ -91,7 +91,7 @@ git version 2.50.1 (Apple Git-155)
 
 ---
 
-## 14:?? — 拉 setup-m5-max repo
+## 14:38 — 拉 setup-m5-max repo ✅
 
 **命令**：
 ```bash
@@ -99,28 +99,43 @@ mkdir -p ~/Documents/千里会/code
 cd ~/Documents/千里会/code
 git clone https://github.com/sit-in/setup-m5-max.git
 cd setup-m5-max
-ls
+ls -al
 ```
 
-**预期输出**：
+**实际输出**（截屏见下）：
 ```
 Cloning into 'setup-m5-max'...
-remote: Enumerating objects: XX, done.
-remote: Counting objects: 100% (XX/XX), done.
-...
-Receiving objects: 100% (XX/XX), XX KiB | XX MiB/s, done.
+remote: Enumerating objects: 38, done.
+remote: Counting objects: 100% (38/38), done.
+remote: Compressing objects: 100% (27/27), done.
+remote: Total 38 (delta 14), reused 33 (delta 9), pack-reused 0 (from 0)
+Receiving objects: 100% (38/38), 107.44 KiB | 62.00 KiB/s, done.
+Resolving deltas: 100% (14/14), done.
 
-# ls 之后:
-Brewfile-core   LOG.md   README.md   SETUP.md   TUTORIAL.md   ai-stack.sh   docs   verify.sh
+# ls -al 后看到的文件：
+.gitignore
+ai-stack.sh
+Brewfile-core
+docs/
+LOG.md
+README.md
+SETUP.md
+TUTORIAL.md
+verify.sh
 ```
 
-**截图建议**：终端的 git clone 输出 + ls 列出文件清单
+![git clone setup-m5-max 成功](docs/screenshots/03-git-clone.png)
 
-**坑预警**：
-- 如果遇到 `xcrun: error: invalid active developer path` → 说明 CLT 还没装完，回去等
-- 如果遇到 SSL 错误 → 网络问题，挂代理重试
+**耗时**：约 5 秒（38 objects / 107 KB）
 
-**待补**：实际输出截图（保存为 `03-git-clone.png`）
+**这一步的意义**：
+- M5 Max 上现在有了完整 LOG.md，你可以直接在新机器上打开它对着跑命令
+- 后面所有"应该跑什么命令"都直接看 SETUP.md / LOG.md，不用再切回 MBA 看
+- 你的实际操作 + 截图会被同步回 LOG.md，最终成为 TUTORIAL.md 的素材
+
+**坑预警（这次没遇到，但要记）**：
+- 如果遇到 `xcrun: error: invalid active developer path` → 说明 CLT 还没装完
+- 如果遇到 SSL/网络错误 → 国内网络可能需要代理或换 SSH 协议
 
 ---
 
@@ -209,7 +224,7 @@ claude
 |------|------|------|
 | 00b | ToDesk MBA→M5 Max 远程 | ⏳ 待补 |
 | 02 | Xcode CLT 下载中 | ✅ [02-xcode-clt-installing.png](docs/screenshots/02-xcode-clt-installing.png) |
-| 03 | git clone 输出 | ⏳ 待补 |
+| 03 | git clone 输出 | ✅ [03-git-clone.png](docs/screenshots/03-git-clone.png) |
 | 04 | brew --version | ⏳ 待补 |
 | 05 | Claude Code 首次启动 | ⏳ 待补 |
 | 06 | 把任务交给 Claude | ⏳ 待补 |
