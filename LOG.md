@@ -185,6 +185,50 @@ verify.sh
 - 国内网络可能很慢，超过 5 分钟还在 Receiving objects 就该考虑换镜像
 - 装完会显示 "Installation successful!" 和 PATH 配置提示
 
+---
+
+## 15:00 — 官方源卡住，换 cunkai 国内镜像 ⚠️
+
+**真实剧情**（截屏见下）：
+
+按 RETURN 后官方脚本一直卡在 git fetch Homebrew 主仓库，下载几乎为 0，循环重试 `Trying again in 2 seconds`。**这是国内访问 github.com 的常态**，特别是高峰时段。
+
+涛哥的处理：
+1. `Ctrl+C` 中断官方安装
+2. 跑 `brew --version` 验证 → `zsh: command not found: brew`（确认没装上）
+3. 换成由 cunkai 维护的国内镜像安装脚本（gitee 上的 HomebrewCN 项目）
+
+> 该脚本的访问方式：到 gitee 搜 `cunkai/HomebrewCN`，README 里有 `curl | bash` 的一行命令。这里不直接贴命令避免误执行。
+
+![cunkai 镜像脚本菜单](docs/screenshots/04c-homebrew-cunkai-mirror.png)
+
+**脚本提供 5 个选项**：
+```
+1、通过清华大学下载brew         ← 推荐
+2、通过 Gitee 下载brew
+3、我已经安装过brew，跳过克隆，直接带我去配置国内下载源
+4、不克隆brew，只把仓库地址设置成 Gitee
+5、不克隆brew，只把仓库地址设置成清华大学
+```
+
+涛哥选了 **1（清华大学）**，这是最稳的选项。
+
+**这个脚本做了什么**（必须了解，不是无脑跑）：
+1. 从清华镜像（`mirrors.tuna.tsinghua.edu.cn`）git clone Homebrew 主仓库
+2. **修改 `~/.zshrc`**：添加 `HOMEBREW_BREW_GIT_REMOTE` / `HOMEBREW_CORE_GIT_REMOTE` / `HOMEBREW_BOTTLE_DOMAIN` 三个环境变量指向清华
+3. 配置 PATH 添加 `/opt/homebrew/bin`
+
+**好处**：以后 `brew install` 走清华，速度比官方快 10-50 倍
+
+**副作用要知道**：
+- `~/.zshrc` 被这个第三方脚本改过——以后从 MBA 搬 `.zshrc` 时**要手动 merge**，不能直接覆盖
+- 这个脚本是第三方维护的（不是 Homebrew 官方），但用了好几年，社区认可度高
+- **安全提醒**：任何 `curl | bash` 的第三方脚本都该先看一眼源码再跑。cunkai 这个项目在 gitee 上开源、几千 star、用户众多，可信度尚可，但严格的安全实践是先 `curl ... | less` 阅读后再 `| bash`
+
+**给后来人的建议**：
+- 国内装 brew **直接用 cunkai 镜像**，不要走官方先卡 5 分钟再换
+- 如果你做的事涉及国内开发者，把这一段直接复制给他们，能省 30 分钟
+
 **装完后必须执行**（**关键，否则新终端找不到 brew**）：
 ```bash
 echo >> ~/.zprofile
@@ -255,6 +299,7 @@ claude
 | 02 | Xcode CLT 下载中 | ✅ [02-xcode-clt-installing.png](docs/screenshots/02-xcode-clt-installing.png) |
 | 03 | git clone 输出 | ✅ [03-git-clone.png](docs/screenshots/03-git-clone.png) |
 | 04a | brew 输密码 + 目录清单 | ✅ [04a-homebrew-password.png](docs/screenshots/04a-homebrew-password.png) |
+| 04c | 官方源卡住，换 cunkai 镜像 | ✅ [04c-homebrew-cunkai-mirror.png](docs/screenshots/04c-homebrew-cunkai-mirror.png) |
 | 04b | brew --version 完成 | ⏳ 待补 |
 | 05 | Claude Code 首次启动 | ⏳ 待补 |
 | 06 | 把任务交给 Claude | ⏳ 待补 |
@@ -275,3 +320,4 @@ claude
 |------|------|------|
 | 14:18 | `xcode-select --install` 跑完没看到弹窗，找了几分钟 | 弹窗是 macOS 系统层面弹的，可能被遮住或在通知中心。Cmd+Tab 找"安装程序"窗口，或重跑命令重新弹 |
 | 14:48 | brew 安装第一次输 sudo 密码输错（密码盲打看不到） | 这是 Unix sudo 标准行为，不是 bug。看到 "Sorry, try again." 再输一次正确即可。注意慢点输，连错 3 次会锁定 |
+| 15:00 | 官方 brew 安装脚本卡在 git fetch（国内访问 github 慢） | Ctrl+C 中断，换 gitee 上 cunkai/HomebrewCN 国内镜像脚本，选清华源，1-2 分钟搞定。副作用：~/.zshrc 被脚本修改 |
