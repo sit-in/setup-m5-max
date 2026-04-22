@@ -1,0 +1,37 @@
+# M5 Max 补充工具 Brewfile
+# 用法: brew bundle --file=Brewfile-extra
+
+# ===== 终端 =====
+cask "warp"                          # AI 终端
+cask "ghostty"                       # 2026 最火原生终端，ProMotion 120Hz
+
+# ===== CLI 增强（"better X" 系列）=====
+brew "lazygit"                       # Git TUI
+brew "lazydocker"                    # Docker TUI
+brew "btop"                          # htop 升级版，支持 GPU 监控
+brew "tldr"                          # 实用版 man pages
+brew "dust"                          # 更好的 du（磁盘占用可视化）
+brew "duf"                           # 更好的 df（磁盘空间）
+brew "procs"                         # 更好的 ps
+brew "hyperfine"                     # 命令行基准测试
+brew "tokei"                         # 代码行数统计
+brew "sd"                            # 更好的 sed
+brew "choose-rust"                   # 更好的 cut/awk
+brew "doggo"                         # 更好的 dig（DNS 查询）
+
+# ===== 开发工具 =====
+cask "tableplus"                     # 数据库 GUI（MySQL/PG/SQLite/Redis）
+cask "bruno"                         # API 测试（Postman 开源替代）
+cask "charles"                       # HTTP 抓包代理
+
+# ===== 效率工具 =====
+cask "jordanbaird-ice"               # 菜单栏图标管理（Bartender 开源替代）
+cask "cleanshot"                     # 截图/录屏增强
+cask "keka"                          # 压缩/解压 GUI
+cask "appcleaner"                    # 卸载 app 清残留
+
+# ===== 通讯 =====
+cask "slack"                         # 团队协作
+cask "zoom"                          # 视频会议
+cask "discord"                       # 社区
+cask "wechat"                        # 微信
