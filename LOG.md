@@ -139,14 +139,53 @@ verify.sh
 
 ---
 
-## 14:?? — 装 Homebrew
+## 14:48 — 装 Homebrew（进行中）
 
 **命令**：
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-**装完会提示**（**重要！必须执行**）：
+**实际过程**（截屏见下）：
+
+1. 执行命令后出现 `==> Checking for sudo access (which may request your password)...`
+2. **要密码** → 输入开机密码（**密码盲打不显示**，这是 Unix 传统）
+3. **第一次输错**了（截图里能看到 `Sorry, try again.`）→ 重新输入正确
+4. 通过后显示要安装的目录清单：
+   ```
+   ==> This script will install:
+   /opt/homebrew/bin/brew
+   /opt/homebrew/share/doc/homebrew
+   /opt/homebrew/share/man/man1/brew.1
+   /opt/homebrew/share/zsh/site-functions/_brew
+   /opt/homebrew/etc/bash_completion.d/brew
+   /opt/homebrew
+   /etc/paths.d/homebrew
+
+   ==> The following new directories will be created:
+   /opt/homebrew/bin
+   /opt/homebrew/etc
+   /opt/homebrew/include
+   /opt/homebrew/lib
+   /opt/homebrew/sbin
+   /opt/homebrew/share
+   /opt/homebrew/var
+   ```
+5. 等待按 `RETURN` 确认 → 进入实际下载阶段
+
+![Homebrew 输密码 + 目录清单](docs/screenshots/04a-homebrew-password.png)
+
+**真实小坑**：
+- **密码盲打**容易输错。涛哥这次第一次就输错了，看到 `Sorry, try again.` 再输一次正确
+- 这是 Unix `sudo` 的标准行为，不是 bug
+- 如果连续输错 3 次会锁定几分钟，所以慢点输
+
+**接下来会发生**：
+- 按 RETURN 后，开始 `git clone` Homebrew 主仓库（约 1-3 分钟，看网速）
+- 国内网络可能很慢，超过 5 分钟还在 Receiving objects 就该考虑换镜像
+- 装完会显示 "Installation successful!" 和 PATH 配置提示
+
+**装完后必须执行**（**关键，否则新终端找不到 brew**）：
 ```bash
 echo >> ~/.zprofile
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
@@ -155,19 +194,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 **验证**：
 ```bash
-brew --version
-# 预期: Homebrew 4.x.x
-which brew
-# 预期: /opt/homebrew/bin/brew
+brew --version    # 预期: Homebrew 4.x.x
+which brew        # 预期: /opt/homebrew/bin/brew
 ```
-
-**坑预警**：
-- 不加 PATH 的话，新开终端 brew 命令会找不到
-- 国内网络可能慢，必要时配镜像源（USTC / 清华 / 阿里）
-
-**截图建议**：
-- 安装过程中需要按 RETURN 确认那一帧
-- 装完跑 `brew --version` 看到版本号那一帧（保存为 `04-homebrew-done.png`）
 
 ---
 
@@ -225,7 +254,8 @@ claude
 | 00b | ToDesk MBA→M5 Max 远程 | ⏳ 待补 |
 | 02 | Xcode CLT 下载中 | ✅ [02-xcode-clt-installing.png](docs/screenshots/02-xcode-clt-installing.png) |
 | 03 | git clone 输出 | ✅ [03-git-clone.png](docs/screenshots/03-git-clone.png) |
-| 04 | brew --version | ⏳ 待补 |
+| 04a | brew 输密码 + 目录清单 | ✅ [04a-homebrew-password.png](docs/screenshots/04a-homebrew-password.png) |
+| 04b | brew --version 完成 | ⏳ 待补 |
 | 05 | Claude Code 首次启动 | ⏳ 待补 |
 | 06 | 把任务交给 Claude | ⏳ 待补 |
 | 07 | brew bundle 进度 | ⏳ 待补 |
@@ -244,3 +274,4 @@ claude
 | 时间 | 现象 | 解决 |
 |------|------|------|
 | 14:18 | `xcode-select --install` 跑完没看到弹窗，找了几分钟 | 弹窗是 macOS 系统层面弹的，可能被遮住或在通知中心。Cmd+Tab 找"安装程序"窗口，或重跑命令重新弹 |
+| 14:48 | brew 安装第一次输 sudo 密码输错（密码盲打看不到） | 这是 Unix sudo 标准行为，不是 bug。看到 "Sorry, try again." 再输一次正确即可。注意慢点输，连错 3 次会锁定 |
