@@ -229,6 +229,46 @@ verify.sh
 - 国内装 brew **直接用 cunkai 镜像**，不要走官方先卡 5 分钟再换
 - 如果你做的事涉及国内开发者，把这一段直接复制给他们，能省 30 分钟
 
+---
+
+## 15:59 — Homebrew 主体装成功，进入 BOTTLE 配置 ✅⏳
+
+cunkai 脚本从清华 git clone 完成（**比官方快 N 倍**），主体安装成功，提示：
+
+```
+- Run brew help to get started
+- Further documentation:
+    https://docs.brew.sh
+此步骤成功
+```
+
+接下来进入"配置国内镜像源 HOMEBREW BOTTLE"阶段。
+
+![Homebrew 主体成功 + BOTTLE 配置](docs/screenshots/04d-homebrew-bottle-config.png)
+
+**截图里出现的几个让人疑惑的输出（其实都正常）**：
+
+1. **`sed: /Users/sitinmax/.zprofile: No such file or directory`**
+   - 新机器还没创建 `.zprofile`，sed 替换不存在的文件就报这个
+   - cunkai 脚本自己注释里写了："有些电脑 xcode 和 git 混乱，再运行一次，此处如果有 error 正常"
+   - **可以忽略**，脚本后面会写到 `.zshrc` 里
+
+2. **`xcode-select: note: Command line tools are already installed`**
+   - 脚本检测 CLT 已装，跳过
+   - **正常**
+
+3. **再次 `Sorry, try again. Password:`**
+   - sudo 密码盲打，第二次又输错了一次
+   - 正常 Unix 行为，慢点输
+
+**BOTTLE 是什么 / 为什么要配**：
+- 普通 `brew install` 会从 GitHub 下载源码现场编译（**慢 + 占 CPU**）
+- BOTTLE 是预编译好的二进制包，直接下载即用（**快 10-100 倍**）
+- 默认 BOTTLE 源在 GitHub Packages，国内访问极慢
+- 配清华 BOTTLE 源后，`brew install xxx` 几秒就能装完一个大包
+
+**这是国内 brew 真正提速的关键步骤**，不要跳过。
+
 **装完后必须执行**（**关键，否则新终端找不到 brew**）：
 ```bash
 echo >> ~/.zprofile
@@ -300,6 +340,7 @@ claude
 | 03 | git clone 输出 | ✅ [03-git-clone.png](docs/screenshots/03-git-clone.png) |
 | 04a | brew 输密码 + 目录清单 | ✅ [04a-homebrew-password.png](docs/screenshots/04a-homebrew-password.png) |
 | 04c | 官方源卡住，换 cunkai 镜像 | ✅ [04c-homebrew-cunkai-mirror.png](docs/screenshots/04c-homebrew-cunkai-mirror.png) |
+| 04d | brew 主体成功 + BOTTLE 配置中 | ✅ [04d-homebrew-bottle-config.png](docs/screenshots/04d-homebrew-bottle-config.png) |
 | 04b | brew --version 完成 | ⏳ 待补 |
 | 05 | Claude Code 首次启动 | ⏳ 待补 |
 | 06 | 把任务交给 Claude | ⏳ 待补 |
