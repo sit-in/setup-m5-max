@@ -55,25 +55,39 @@ sitinmax@MacBook-Pro ~ %
 
 ---
 
-## 14:30 — Xcode CLT 装完，验证
+## 14:30 — Xcode CLT 装完，验证 ✅
 
-**命令**：
+**命令 + 实际输出**：
 ```bash
-xcode-select -p
-```
-
-**预期输出**（待你跑出来贴上）：
-```
+sitinmax@MacBook-Pro ~ %   xcode-select -p
 /Library/Developer/CommandLineTools
+
+sitinmax@MacBook-Pro ~ % git --version
+git version 2.50.1 (Apple Git-155)
 ```
 
-**附加验证**：
-```bash
-git --version
-# 预期: git version 2.x.x (Apple Git-xxx)
-```
+**意外的小发现**：装完 CLT 直接就有 git 了（v2.50.1，Apple 自己 patch 过的版本），完全不需要额外 `brew install git`。后面 Homebrew 还会装一个更新的 git，但当下要 git clone 已经足够。
 
-**待补**：实际输出截图
+**用户真实吐槽（值得写进教程的避坑提示）**：
+
+> "安装 cmd line tool 需要 GUI 确认，我觉得苹果可以改进下，感觉不是很方便，我找了几分钟才看到不是在命令行确认的"
+
+— 涛哥，2026-04-22
+
+**这是个真实的体验坑**：
+- 命令 `xcode-select --install` 跑完只输出 `note: install requested for command line developer tools`，**没有任何提示告诉你弹窗在哪**
+- 弹窗是 macOS 系统层面弹出的，可能被其他窗口遮住、可能在另一个屏幕、可能在 ToDesk 远程会话里位置很奇怪
+- 找弹窗的方法：
+  - 检查 Dock 有没有蓝色弹跳的图标
+  - 看屏幕右上角通知中心
+  - **Cmd+Tab 切换看有没有"安装程序"窗口**
+  - 实在找不到就再跑一次 `xcode-select --install`，会重新弹
+
+**给苹果的建议**（写进教程做槽点）：
+- 命令行直接给一行提示："请在屏幕上找到弹窗并点击 Install"
+- 或者支持 `--accept-license --silent` 全自动模式
+
+这种"明明是命令行，却还要 GUI 确认"的体验，是 macOS 不少地方的通病。值得作为这篇教程的一个真实小细节。
 
 ---
 
@@ -212,4 +226,6 @@ claude
 
 > 一栏一行：发生时间 / 现象 / 排查 / 解决
 
-（暂无）
+| 时间 | 现象 | 解决 |
+|------|------|------|
+| 14:18 | `xcode-select --install` 跑完没看到弹窗，找了几分钟 | 弹窗是 macOS 系统层面弹的，可能被遮住或在通知中心。Cmd+Tab 找"安装程序"窗口，或重跑命令重新弹 |
