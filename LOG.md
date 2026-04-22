@@ -537,16 +537,39 @@ export ALL_PROXY=socks5://127.0.0.1:7897
 
 ---
 
-## 后续阶段（待装）
+## 17:55 — 阶段 5.3：系统偏好微调 ✅
 
-- [x] **阶段 1**：`brew bundle --file=Brewfile-core` 装核心工具 ✅（Lark 除外）
-- [x] **阶段 2**：AI 栈 ✅ 工具 + 模型（llama3.3 70B + qwen2.5 72B，共 89GB）
-- [ ] **阶段 3**：iOS 环境 — cocoapods/swiftformat ✅，**Xcode 需手动 App Store 装**
-- [ ] **阶段 4**：从 MBA tar 打包关键配置 → AirDrop → M5 Max 解包
-- [ ] **阶段 5**：跑 `bash verify.sh`，全绿才算完
-- [ ] **阶段 6**：跑第一个真实任务（Llama 70B 对话 / Flux 出图 / Whisper 转录）
+```bash
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true    # 显示所有文件扩展名
+defaults write com.apple.finder ShowPathbar -bool true             # Finder 路径栏
+defaults write com.apple.screencapture location ~/Pictures/Screenshots  # 截图位置
+defaults write -g ApplePressAndHoldEnabled -bool false             # 关闭按住弹字符选择
+killall Finder SystemUIServer                                      # 重启生效
+```
 
-每完成一步，回来这里更新时间戳 + 实际输出 + 截图。
+全部成功，Finder 和 SystemUIServer 已重启。
+
+---
+
+## 总体进度
+
+- [x] **阶段 1**：brew bundle 核心工具 ✅（Lark 除外，CDN 慢）
+- [x] **阶段 2**：AI 栈 ✅ 工具 + 模型 89GB
+- [ ] **阶段 3**：iOS — cocoapods/swiftformat ✅，**Xcode 需手动 App Store**
+- [ ] **阶段 4**：从 MBA 搬配置 — **需要你在 MBA 上打包 AirDrop 过来**
+- [x] **阶段 5.3**：系统偏好微调 ✅
+- [ ] **阶段 5 其余**：Claude Code 配置 / 登录各工作流 app — 依赖阶段 4
+- [ ] **阶段 6**：跑验证 + 第一个真实任务
+
+### 需要你手动做的事（自动化做不了的）
+
+1. **App Store 装 Xcode**（~15GB），装完告诉我跑 license accept + swiftlint
+2. **MBA 上打包配置**（在 MBA 终端跑）：
+   ```bash
+   cd ~ && tar czf m5-handover.tgz .ssh/ .gitconfig .zshrc .zprofile .claude/ .config/ "Library/Application Support/Claude/"
+   ```
+   然后 AirDrop 到 M5 Max，告诉我，我来展开 + 验证
+3. **Lark**：去 lark.com 下载 DMG 直装，或设代理后 `brew install --cask lark`
 
 ---
 
