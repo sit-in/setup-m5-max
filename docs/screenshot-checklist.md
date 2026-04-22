@@ -25,6 +25,7 @@ killall SystemUIServer
 | 编号 | 文件名 | 内容 |
 |------|--------|------|
 | 00 | `00-three-machines.png` | 三机分工示意图 / 三台机器并排照片 |
+| 00b | `00b-todesk.png` | ToDesk 从 MBA 远程控制 M5 Max 的画面 |
 | 01 | `01-filevault.png` | FileVault 开启界面 |
 | 02 | `02-xcode-clt-prompt.png` | Xcode CLT 安装弹窗 |
 | 03 | `03-git-clone.png` | git clone 命令 + 输出 |
