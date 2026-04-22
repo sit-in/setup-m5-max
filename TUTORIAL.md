@@ -94,8 +94,8 @@ xcode-select --install
 
 会弹出系统对话框，点 **Install** → 同意协议 → 等 5-15 分钟。
 
-![Xcode CLT 安装弹窗](docs/screenshots/02-xcode-clt-prompt.png)
-> 截图建议：弹窗截图（Cmd+Shift+4 框选）
+![Xcode CLT 正在下载](docs/screenshots/02-xcode-clt-installing.png)
+> 弹窗点 Install 之后会进入这个下载界面，约 8-15 分钟（看网速）
 
 装完验证：
 
