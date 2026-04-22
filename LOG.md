@@ -426,9 +426,65 @@ claude
 
 ---
 
+## 16:51 — 阶段 1：brew bundle --file=Brewfile-core ✅
+
+**命令**：
+```bash
+brew bundle --file=Brewfile-core --verbose
+```
+
+**开始时间**：16:51
+**完成时间**：17:10（约 19 分钟）
+
+**过程**：
+1. 第一次跑：所有包快速下载（缓存 bottle），但 **Lark（飞书）卡在 CDN 下载**
+   - Lark DMG 从 `sf16-sg.larksuitecdn.com`（新加坡节点）下载，速度 ~1MB/min
+   - 终端没有设置代理环境变量（`HTTP_PROXY` 等为空），所以即使系统有代理，brew 的 curl 也不走代理
+   - 等了约 15 分钟只下了 71MB/~300MB，手动 kill 进程
+2. 第二次跑：注释掉 Lark，重跑 `brew bundle`
+   - 所有 bottle 从缓存安装，每个包几秒钟
+   - 两个 deprecated tap（`homebrew/bundle`、`homebrew/services`）报 Error 但不影响实际安装
+   - 79 个 formula + 15 个 cask 全部安装成功
+3. 额外步骤：`fnm install --lts` 装 Node.js v24.15.0
+
+**Brewfile 中两个 deprecated tap 的说明**：
+```
+tap "homebrew/bundle"    # 已 deprecated，brew bundle 现在是内置子命令
+tap "homebrew/services"  # 已 deprecated，brew services 现在是内置子命令
+```
+这两行可以从 Brewfile-core 中删掉，不影响功能。报 Error 但 exit code 1 不影响其他包安装。
+
+**验证结果**：
+
+| 工具 | 版本 | 状态 |
+|------|------|------|
+| git | 2.54.0 (Homebrew) | ✅ |
+| node | v24.15.0 (via fnm) | ✅ |
+| npm | 11.12.1 | ✅ |
+| python3 | 3.14.4 (Homebrew) | ✅ |
+| docker | OrbStack 2.1.1 已装 | ⚠️ 需首次 GUI 启动才能用 docker CLI |
+| ollama | 0.21.0 | ✅（服务未启动，正常，阶段 2 再启） |
+| gh | 2.90.0 | ✅ |
+| ripgrep | 15.1.0 | ✅ |
+| bat | 0.26.1 | ✅ |
+| fzf | 0.71.0 | ✅ |
+| starship | 1.25.0 | ✅ |
+| neovim | 0.12.1 | ✅ |
+| ffmpeg | 8.1 | ✅ |
+| uv | 0.11.7 | ✅ |
+| mise | 2026.4.18 | ✅ |
+| lark | 未装 | ⏭️ CDN 太慢，后面设代理或官网下载 |
+
+**坑记录**：
+- `homebrew/bundle` 和 `homebrew/services` 这两个 tap 已 deprecated，Brewfile 里可以删掉
+- Lark 的 brew cask 从新加坡 CDN 下载，国内直连极慢（~1MB/min），建议走代理或直接去 lark.com 下 DMG
+- brew 的 curl 不会自动使用系统代理，需要在终端设置 `HTTP_PROXY` / `HTTPS_PROXY` 环境变量
+
+---
+
 ## 后续阶段（待装）
 
-- [ ] **阶段 1**：`brew bundle --file=Brewfile-core` 装 30 个核心工具（约 30 分钟）
+- [x] **阶段 1**：`brew bundle --file=Brewfile-core` 装核心工具 ✅（Lark 除外）
 - [ ] **阶段 2**：`bash ai-stack.sh` 装 AI 栈 + 拉 Llama 70B / Qwen 72B 模型（挂机数小时）
 - [ ] **阶段 3**：App Store 装 Xcode（约 15GB，可提前挂着）
 - [ ] **阶段 4**：从 MBA tar 打包关键配置 → AirDrop → M5 Max 解包
@@ -472,3 +528,5 @@ claude
 | 15:00 | 官方 brew 安装脚本卡在 git fetch（国内访问 github 慢） | Ctrl+C 中断，换 gitee 上 cunkai/HomebrewCN 国内镜像脚本，选清华源，1-2 分钟搞定。副作用：~/.zshrc 被脚本修改 |
 | 15:55 | 顿悟：网络代理本应是第 -1 步，不是事后补救 | 装机一开始就把代理打开，全套流程能省 30-60 分钟绕路时间。已写进 SETUP.md / TUTORIAL.md 顶部 |
 | 16:?? | 装 Claude Code：没代理 30 分钟没装上，装了代理 1 分钟搞定 | 30 倍速差，这是魔法该是第 -1 步的硬核证据。涛哥原话："都想给我自己一耳光，太傻了" |
+| 16:51 | brew bundle 第一次跑，Lark CDN（新加坡）下载极慢 ~1MB/min | kill 进程，注释掉 Lark 重跑。Lark 后面设代理或官网直装。原因：终端 `HTTP_PROXY` 未设，brew curl 不走系统代理 |
+| 17:05 | `homebrew/bundle` 和 `homebrew/services` tap 报 deprecated Error | 不影响安装，这两个已内置到 brew 中。Brewfile 里的 tap 行可删 |

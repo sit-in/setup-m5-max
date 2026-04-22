@@ -70,7 +70,7 @@ cask "arc"
 # ===== 工作流 =====
 cask "telegram"
 cask "notion"
-cask "lark"                        # 飞书
+cask "lark"                        # 飞书 — CDN 慢，可能需要代理或官网直装
 
 # ===== 字体 =====
 cask "font-jetbrains-mono-nerd-font"
