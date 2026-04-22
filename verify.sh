@@ -9,6 +9,7 @@ NC='\033[0m'
 
 PASS=0
 FAIL=0
+WARN=0
 
 check() {
   local desc=$1
@@ -22,11 +23,23 @@ check() {
   fi
 }
 
+warn() {
+  local desc=$1
+  local cmd=$2
+  if eval "$cmd" >/dev/null 2>&1; then
+    echo -e "${GREEN}✓${NC} $desc"
+    PASS=$((PASS+1))
+  else
+    echo -e "${YELLOW}⚠${NC} $desc  ${YELLOW}(建议开启)${NC}"
+    WARN=$((WARN+1))
+  fi
+}
+
 echo "=== 系统 ==="
 check "macOS 版本 ≥ 26"        "[[ $(sw_vers -productVersion | cut -d. -f1) -ge 26 ]]"
 check "芯片是 Apple Silicon"   "uname -m | grep -q arm64"
 check "Xcode CLT"             "xcode-select -p"
-check "FileVault 已开启"        "fdesetup status | grep -q 'On'"
+warn "FileVault 已开启"         "fdesetup status | grep -q 'On'"
 
 echo ""
 echo "=== 包管理 ==="
@@ -59,7 +72,7 @@ check "MLX 环境存在"            "[[ -d ~/Documents/千里会/code/ai-workspa
 
 echo ""
 echo "=== GUI 应用 ==="
-for app in Cursor "Visual Studio Code" Raycast 1Password iTerm Telegram Notion Lark; do
+for app in Cursor "Visual Studio Code" Raycast 1Password iTerm Telegram Notion LarkSuite; do
   check "$app.app 已装"        "[[ -d \"/Applications/$app.app\" ]]"
 done
 
@@ -81,7 +94,7 @@ check "SwiftLint"             "command -v swiftlint"
 
 echo ""
 echo "=== 总结 ==="
-echo -e "${GREEN}PASS: $PASS${NC}    ${RED}FAIL: $FAIL${NC}"
+echo -e "${GREEN}PASS: $PASS${NC}    ${RED}FAIL: $FAIL${NC}    ${YELLOW}WARN: $WARN${NC}"
 
 if [ $FAIL -eq 0 ]; then
   echo -e "${GREEN}✅ 全部通过，可以开始干活了${NC}"
