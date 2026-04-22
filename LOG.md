@@ -521,11 +521,27 @@ export ALL_PROXY=socks5://127.0.0.1:7897
 
 ---
 
+## 17:50 — 阶段 3：iOS 开发环境（部分完成）⚠️
+
+**已完成**：
+```
+✅ cocoapods 1.16.2 (brew)
+✅ swiftformat 0.61.0 (brew)
+```
+
+**待人工操作**：
+- Xcode：`mas install` 因需要 sudo 密码交互失败，需从 App Store 手动安装（~15GB）
+- swiftlint：依赖完整 Xcode，Xcode 装完后 `brew install swiftlint`
+- Xcode 装完后需跑：`sudo xcodebuild -license accept`
+- iOS Simulator：Xcode → Settings → Platforms → 下载
+
+---
+
 ## 后续阶段（待装）
 
 - [x] **阶段 1**：`brew bundle --file=Brewfile-core` 装核心工具 ✅（Lark 除外）
 - [x] **阶段 2**：AI 栈 ✅ 工具 + 模型（llama3.3 70B + qwen2.5 72B，共 89GB）
-- [ ] **阶段 3**：App Store 装 Xcode（约 15GB，可提前挂着）
+- [ ] **阶段 3**：iOS 环境 — cocoapods/swiftformat ✅，**Xcode 需手动 App Store 装**
 - [ ] **阶段 4**：从 MBA tar 打包关键配置 → AirDrop → M5 Max 解包
 - [ ] **阶段 5**：跑 `bash verify.sh`，全绿才算完
 - [ ] **阶段 6**：跑第一个真实任务（Llama 70B 对话 / Flux 出图 / Whisper 转录）
