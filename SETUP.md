@@ -53,9 +53,11 @@ xcode-select --install
 
 ### 0.3 装 Homebrew
 
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
+**国内网络强烈推荐用 cunkai 镜像脚本**（见 LOG.md "15:00 — 官方源卡住"段落，详细记录了为什么）：
+
+到 gitee 搜 `cunkai/HomebrewCN`，README 里有一行 `curl ... | bash` 命令，跑完会让你选源，**选 1（清华大学）**。
+
+> 国外网络/翻墙环境可以走官方：`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
 装完按提示**把 brew 加进 PATH**（Apple Silicon 是 `/opt/homebrew/bin/brew shellenv`）：
 
@@ -64,6 +66,8 @@ echo >> ~/.zprofile
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
+
+> ⚠️ cunkai 脚本会自动改 `~/.zshrc`（加镜像源环境变量），以后从老机器搬 `.zshrc` 时要手动 merge，不能直接覆盖。
 
 ### 0.4 装 Claude Code
 
