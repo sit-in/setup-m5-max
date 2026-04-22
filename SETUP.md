@@ -69,19 +69,15 @@ claude
 
 ### 0.5 拉这份配置文档过来
 
-两条路任选：
-
-**A. 走 GitHub**（推荐，将来还能继续维护）：
 ```bash
 mkdir -p ~/Documents/千里会/code
 cd ~/Documents/千里会/code
-git clone <你的-setup-m5-max-repo-url>
+git clone https://github.com/sit-in/setup-m5-max.git
 cd setup-m5-max
 ```
 
-**B. 走 AirDrop / iCloud Drive**（一次性最快）：
-- 从老机器把 `~/Documents/千里会/code/setup-m5-max/` 整个 AirDrop 过来
-- 放到新机器同样的路径
+> 这一步**在装 Homebrew 之前**也能跑——Xcode CLT 已经自带 git。
+> repo 是 public 的，不需要认证。
 
 ### 0.6 启动 Claude Code 接管
 

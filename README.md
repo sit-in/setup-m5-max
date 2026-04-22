@@ -11,18 +11,29 @@
 | `ai-stack.sh` | AI 工具栈安装（Ollama / MLX / ComfyUI / Whisper） |
 | `verify.sh` | 配置完成后的 sanity check |
 
-## 快速开始
+## 快速开始（新机器零环境）
 
 ```bash
-# 阶段 0：手动 5 分钟
+# 1. 装 Xcode CLT（自带 git）
 xcode-select --install
+
+# 2. 拉这个 repo
+git clone https://github.com/sit-in/setup-m5-max.git
+cd setup-m5-max
+
+# 3. 装 Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# 4. 装 Claude Code 并启动
 brew install --cask claude-code
 claude
-
-# 然后在 Claude Code 里说：
-# "帮我按 SETUP.md 的阶段 1-6 配置这台 M5 Max"
 ```
+
+进 Claude Code 后说：
+
+> 按 SETUP.md 的阶段 1-6 配置这台 M5 Max，每完成一阶段告诉我让我确认。
 
 详见 [SETUP.md](./SETUP.md)。
 
