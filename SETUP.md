@@ -24,6 +24,24 @@
 
 ## 阶段 0：手动起步（5 分钟，必须亲自操作）
 
+### 0.-1 （**最重要**）先把网络代理装上
+
+**这是国内用户的第一步，不是"可选"**。
+
+如果你能直接稳定访问 github.com / githubusercontent.com / formulae.brew.sh，跳过这节。
+
+否则：先在 M5 Max 上装好你常用的代理工具（任意一个：Clash / Surge / Stash / Loon / V2Box / Quantumult X 等），并确认终端里能稳定 `curl -I https://github.com` 返回 200。
+
+**不装代理的代价**：
+- Homebrew 官方源 `git fetch` 直接卡死
+- 后面所有 `brew install` 拉 bottle 极慢
+- ollama / huggingface 拉模型基本不可用
+- npm / pip 全球源都慢
+
+替代方案（不能/不愿用代理）：全程用国内镜像（cunkai 装 brew、阿里 npm 镜像、清华 pypi、HuggingFace 国内镜像等）。能跑通，但每个工具都要单独配，**整体多花 30-60 分钟**。
+
+**强烈建议**：装机第一件事就把代理打开。
+
 ### 0.0 （推荐）装 ToDesk 远程控制
 
 让你坐在老机器（MBA）上远程操作新机器（M5 Max），后面所有步骤都更舒服。
