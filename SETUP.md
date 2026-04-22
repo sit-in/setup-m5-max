@@ -93,11 +93,22 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 brew install --cask claude-code
 ```
 
-装完跑一次：
+**两种启动方式（按场景选）**：
+
+**方式 A — 标准启动**（默认推荐，每条命令都问你确认）：
 ```bash
 claude
 ```
-按提示登录 Anthropic 账号（用 Claude Max 那个）。
+
+**方式 B — 装机全自动模式**（适合本场景）：
+```bash
+claude --dangerously-skip-permissions
+```
+跳过所有权限提示，**只在受控环境用**（装机、批量重构等已知任务范围的场景）。
+
+**登录方式（任选一种）**：
+- 原生 Anthropic 账号（需 Claude Max / Pro 订阅）
+- 通过 [aigocode.com](https://aigocode.com) 中转（按 token 计费，适合无订阅或团队接入；这是涛哥自己运营的中转服务）
 
 ### 0.5 拉这份配置文档过来
 

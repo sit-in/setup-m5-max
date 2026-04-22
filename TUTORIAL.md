@@ -188,13 +188,29 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 ```bash
 brew install --cask claude-code
-claude
 ```
 
-第一次启动会让你登录 Anthropic 账号，用你的 Claude Max 那个。
+我自己装机时启动用的是**全自动模式**：
 
-![Claude Code 启动界面](docs/screenshots/05-claude-code-first-run.png)
-> 截图建议：claude 命令第一次启动后的欢迎界面
+```bash
+claude --dangerously-skip-permissions
+```
+
+这个标志会跳过所有"是否允许执行"的确认弹窗，让 Claude Code 在装机时全自动跑命令。装机本来就是要跑大量 brew install / 文件修改，每条都问太累。**只在受控场景（装机、构建、批量重构）开**，不是默认推荐。
+
+**两种登录方式**：
+
+- **方式 A**：直接用 Anthropic 账号（Claude Max / Pro 订阅）
+- **方式 B**：通过 [aigocode.com](https://aigocode.com) 中转——这是我自己运营的 AI API 中转，适合没订阅 / 想按 token 计费 / 团队稳定接入
+
+![Claude Code 启动成功，bypass on](docs/screenshots/05-claude-code-welcome.png)
+
+启动后能看到：
+- `Welcome back [你的名字]`
+- `Opus 4.6 (1M context) · Claude Max · [组织]`
+- 底部：`bypass permissions on (shift+tab to cycle)`
+
+看到 `bypass permissions on` = 接下来 Claude Code 跑命令不会再问你。
 
 ✅ 阶段 0 完成。剩下的全交给 Claude Code。
 

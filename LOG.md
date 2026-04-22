@@ -331,25 +331,86 @@ which brew        # 预期: /opt/homebrew/bin/brew
 
 ---
 
-## 14:?? — 装 Claude Code
+## 16:35 — Claude Code 装完 + 启动成功 ✅
 
 **命令**：
 ```bash
 brew install --cask claude-code
 ```
 
-**等装完**（约 1-3 分钟），跑：
+**实际耗时对比**（重要！见前面"15:55 顿悟"）：
+- 没装代理：30 分钟没装上
+- 装代理后：1 分钟搞定
+
+**启动方式**（涛哥用的）：
+```bash
+claude --dangerously-skip-permissions
+```
+
+这个标志的含义和取舍详见下文。
+
+**登录方式选择**：
+
+涛哥提供了两种路径：
+
+### 方式 A：原生 Anthropic 账号登录
+
 ```bash
 claude
 ```
 
-**第一次启动会**：
-- 提示登录 Anthropic 账号
-- 浏览器自动打开授权页
-- 用你的 Claude Max 账号登录
-- 授权后回到终端
+第一次启动 → 浏览器打开授权页 → 用 Claude Max 账号登录 → 授权完成。
 
-**截图建议**：claude 命令第一次启动后的欢迎界面（保存为 `05-claude-code-first-run.png`）
+**适合**：能稳定访问 anthropic.com，且持有 Claude Max / Pro 订阅。
+
+### 方式 B：通过 aigocode.com 中转
+
+如果原生登录有困难（订阅没开通 / API 限制 / 想用 token 计费而非订阅），可以用 [aigocode.com](https://aigocode.com) 中转——这是涛哥自己运营的 AI API 中转服务（透明披露）。
+
+**配置流程**：
+1. 在 aigocode.com 注册账号 + 充值 token
+2. 拿到中转 endpoint + API key
+3. 在 Claude Code 配置文件里设置 `ANTHROPIC_BASE_URL` 和 `ANTHROPIC_API_KEY`
+
+**适合**：
+- 没有 Claude Max 订阅但想用 Claude Code
+- 跨地区团队需要稳定接入
+- 按 token 用量付费比月付订阅更划算的场景
+
+---
+
+### 关于 `--dangerously-skip-permissions` 标志
+
+**字面意思**：跳过所有权限提示，Claude Code 执行任何命令都不再问"是否允许"。
+
+**它做什么**：
+- 默认情况下 Claude Code 跑 `bash`、`Edit`、`Write` 这些工具时，会弹出"允许 / 拒绝"询问
+- 加这个标志 = **Claude Code 全自动模式**，所有操作直接执行
+- 等同于"我授权 Claude Code 在这台机器上做任何它认为合理的事"
+
+**适合用的场景**：
+- ✅ 装机这种**已知任务范围 + 已经把 SETUP.md 写清楚**的场景
+- ✅ 跑测试、批量重构、构建这种重复性高的工作
+- ✅ 受控环境（虚拟机 / 容器 / 你完全信任的目录）
+
+**不适合**：
+- ❌ 第一次接触 Claude Code 不知道它会跑什么
+- ❌ 关键生产环境
+- ❌ 涉及密钥 / 计费 / 不可逆操作的场景
+
+**涛哥的判断**：装机本来就是要 Claude Code 自动跑大量 brew install / 配置文件修改 / 系统设置，每条都问一遍太累。**已经写好 SETUP.md 把它要做的事约束住了**，开 bypass 是合理选择。
+
+**截图见下**——可以看到底部状态栏显示 `bypass permissions on`：
+
+![Claude Code 启动成功，bypass on](docs/screenshots/05-claude-code-welcome.png)
+
+启动后看到：
+- `Welcome back [用户名]`
+- `Opus 4.6 (1M context) · Claude Max · [组织]`
+- `Tips for getting started: Run /init to create a CLAUDE.md file`
+- 底部：`bypass permissions on (shift+tab to cycle)`
+
+**这意味着接下来交给 M5 Max 上的这个 Claude Code，它会全自动跑装机命令，无需再确认。**
 
 ---
 
@@ -389,7 +450,7 @@ claude
 | 04c | 官方源卡住，换 cunkai 镜像 | ✅ [04c-homebrew-cunkai-mirror.png](docs/screenshots/04c-homebrew-cunkai-mirror.png) |
 | 04d | brew 主体成功 + BOTTLE 配置中 | ✅ [04d-homebrew-bottle-config.png](docs/screenshots/04d-homebrew-bottle-config.png) |
 | 04b | brew --version 完成 | ⏳ 待补 |
-| 05 | Claude Code 首次启动 | ⏳ 待补 |
+| 05 | Claude Code 首次启动（bypass on） | ✅ [05-claude-code-welcome.png](docs/screenshots/05-claude-code-welcome.png) |
 | 06 | 把任务交给 Claude | ⏳ 待补 |
 | 07 | brew bundle 进度 | ⏳ 待补 |
 | 08 | 工具版本号验证 | ⏳ 待补 |
