@@ -1,0 +1,78 @@
+# M5 Max 核心 Brewfile
+# 用法: brew bundle --file=Brewfile-core
+#
+# 装完之后跑: brew bundle cleanup --file=Brewfile-core --force  (清掉不在清单里的包)
+
+# ===== Tap =====
+tap "homebrew/bundle"
+tap "homebrew/services"
+
+# ===== Shell 体验 =====
+brew "starship"                    # 极简 prompt
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+brew "zoxide"                      # cd 替代品（按使用频率跳）
+brew "fzf"                         # 模糊查找
+
+# ===== 核心 CLI =====
+brew "git"
+brew "gh"                          # GitHub CLI
+brew "git-delta"                   # 更好看的 diff
+brew "jq"                          # JSON 处理
+brew "yq"                          # YAML 处理
+brew "ripgrep"                     # rg，比 grep 快 10x
+brew "fd"                          # find 的现代替代
+brew "bat"                         # cat 的语法高亮版
+brew "eza"                         # ls 的现代替代
+brew "tree"
+brew "tmux"
+brew "neovim"
+
+# ===== 网络 =====
+brew "curl"
+brew "wget"
+brew "httpie"                      # 比 curl 友好
+brew "mtr"                         # 网络诊断
+brew "nmap"
+
+# ===== 文件 / 备份 =====
+brew "rsync"                       # 系统自带是旧版，这个新
+brew "rclone"                      # 多云同步（R2/S3/Drive 都支持）
+brew "p7zip"
+brew "unar"                        # 处理中文压缩包
+brew "ffmpeg"                      # 音视频处理
+
+# ===== 编程语言版本管理 =====
+brew "mise"                        # 统一管理 node/python/go/ruby 版本
+brew "uv"                          # Python 包管理（比 pip 快 10-100x）
+brew "fnm"                         # Node 版本管理（比 nvm 快）
+
+# ===== 容器 =====
+cask "orbstack"                    # Docker Desktop 的 Apple Silicon 替代，快 3-5 倍
+
+# ===== AI / LLM 工具（轻量的放这里，重的去 ai-stack.sh）=====
+brew "ollama"                      # 本地 LLM 服务
+
+# ===== GUI 应用 =====
+cask "cursor"                      # AI 编辑器
+cask "visual-studio-code"          # 备用编辑器
+cask "raycast"                     # Spotlight 替代品
+cask "1password"
+cask "1password-cli"
+cask "iterm2"                      # 终端
+cask "rectangle"                   # 窗口管理
+cask "stats"                       # 菜单栏系统监控
+
+# ===== 浏览器 =====
+cask "google-chrome"
+cask "arc"
+
+# ===== 工作流 =====
+cask "telegram"
+cask "notion"
+cask "lark"                        # 飞书
+
+# ===== 字体 =====
+cask "font-jetbrains-mono-nerd-font"
+cask "font-sf-pro"
+cask "font-sf-mono"

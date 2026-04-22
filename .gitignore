@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+._*
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 本地配置 / 密钥（兜底，本目录不应该有）
+*.local
+*.secret
+.env
+.env.*
+!.env.example
+
+# 日志 / 临时
+*.log
+*.tmp
