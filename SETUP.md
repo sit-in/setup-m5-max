@@ -59,7 +59,7 @@
 - [ ] 开启 FileVault 全盘加密（System Settings → Privacy & Security → FileVault）
 - [ ] 触控板启用三指拖移（Accessibility → Pointer Control → Trackpad Options）
 - [ ] 关闭"自动调整亮度"，外接显示器场景下不爽
-- [ ] 设置主机名：`scutil --set HostName m5max-richard` （之后跑）
+- [ ] 设置主机名：`scutil --set HostName m5max-yourname` （之后跑）
 
 ### 0.2 装 Xcode Command Line Tools
 
