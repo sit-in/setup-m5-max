@@ -4,7 +4,7 @@
 >
 > 装机省时间的关键不是按部就班，是提前知道哪里会摔。下面这 10 个坑，全部来自我 4 月 22 号拿到 M5 Max 128G 当天的真实踩坑记录——不是网上搜来的，是自己摔出来的。
 
-![文章封面](gen:Cinematic illustration of a developer facing a laptop with red warning signs floating around: blocked network, password prompt, missing dialog box, slow download progress; overall mood is "things that go wrong during setup"; clean modern minimalist style; blue, red, and white palette)
+![文章封面](images/pitfalls-cover.png)
 
 ---
 
@@ -18,7 +18,7 @@
 
 **真实数据**：同一天下午装 `claude-code`——没代理卡了 30 分钟没装上，开代理后 1 分钟搞定。**30 倍速差。** 我当时的原话："都想给我自己一耳光，太傻了。"
 
-![代理是第 -1 步](gen:Minimalist illustration of two parallel network paths from a Mac to GitHub: top path has a proxy/VPN tower with fast green data flow, bottom path goes directly through "China Network" with red broken pipes; clear before/after contrast)
+![代理是第 -1 步](images/pitfalls-proxy.png)
 
 ---
 
@@ -40,7 +40,7 @@ export ALL_PROXY=socks5://127.0.0.1:7897
 
 **真实数据**：`ollama pull` 拉 70B 大模型时，没设环境变量直接卡在 "pulling manifest" 转圈；设了之后立刻开始下载。
 
-![终端代理需手动 export](gen:Split screen illustration: left side shows macOS system proxy settings checked "ON" but a terminal with shell commands failing with red X marks; right side shows the same terminal with "export HTTP_PROXY" command and green checkmarks; minimalist tech style)
+![终端代理需手动 export](images/pitfalls-terminal-proxy.png)
 
 ---
 
@@ -137,7 +137,7 @@ export ALL_PROXY=socks5://127.0.0.1:7897
 
 看到 EOF 别慌，重跑就行。总共 89GB 的模型，断断续续全拉完了。
 
-![ollama 大模型下载断点续传](gen:Visualization of a large file download with multiple disconnect points marked with red X, but each restart picks up from where it stopped; progress bar going 0%→39%→92%→100% with arrows; LLM model icon Qwen and Llama; data flow style illustration)
+![ollama 大模型下载断点续传](images/pitfalls-ollama-resume.png)
 
 ---
 
@@ -156,7 +156,7 @@ export ALL_PROXY=socks5://127.0.0.1:7897
 
 ---
 
-![文章总结](gen:Minimalist infographic showing "10 pitfalls overcome" with 10 small icons in a grid representing each pitfall, all with green checkmarks; clean modern design, blue and white palette; suitable as article closing image)
+![文章总结](images/pitfalls-summary.png)
 
 ## 所有坑的元规律：国内开发者的"前置基础设施债"
 
