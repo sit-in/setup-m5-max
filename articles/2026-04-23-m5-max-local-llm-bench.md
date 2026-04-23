@@ -6,7 +6,7 @@
 > 测试工具：llama.cpp build 8880（Metal GPU backend）
 > 测试方法：llama-bench，pp512（输入处理）+ tg128（文本生成），每个模型跑 3 轮取均值
 
-![文章封面](gen:Cinematic top-down photo of a MacBook Pro on a dark desk with its screen showing terminal benchmark numbers glowing in green; around it are floating holographic labels of AI model names like Llama, Qwen, DeepSeek; futuristic data visualization style; blue and green palette on dark background)
+<!-- 封面图待生成：用 ComfyUI/Flux 生成科技感封面 -->
 
 ---
 
@@ -26,7 +26,7 @@
 > **tg128**：生成 128 个 token 的速度，反映"回答你的问题"有多快
 > 所有模型 Q4_K_M 量化，Metal GPU 全层卸载（-ngl 99）
 
-![跑分对比图](gen:Clean bar chart comparing 7 AI models on M5 Max: x-axis shows model names from 3B to 72B, y-axis shows tokens per second; two bars per model in blue and orange for prompt processing and text generation; numbers clearly labeled on each bar; minimal white background with subtle grid lines; data visualization style)
+![跑分对比图](images/bench-chart-speed.png)
 
 ---
 
@@ -133,7 +133,7 @@ GPU 层数:  全部卸载 (-ngl 99)
 
 ---
 
-![文章总结](gen:Minimalist infographic showing a MacBook Pro silhouette with "128GB" prominently displayed, surrounded by 7 model icons arranged by size from small 3B to large 72B, each with their speed number; clean tech style, dark background with blue and white accents; suitable as article closing image)
+![内存占用对比](images/bench-chart-memory.png)
 
 ## 总结：128GB 到底值不值
 
