@@ -6,7 +6,7 @@
 > 测试工具：llama.cpp build 8880（Metal GPU backend）
 > 测试方法：llama-bench，pp512（输入处理）+ tg128（文本生成），每个模型跑 3 轮取均值
 
-<!-- 封面图待生成：用 ComfyUI/Flux 生成科技感封面 -->
+![文章封面](images/bench-cover.png)
 
 ---
 
