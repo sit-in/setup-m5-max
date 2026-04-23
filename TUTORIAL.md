@@ -86,6 +86,9 @@ export ALL_PROXY=socks5://127.0.0.1:7897
 3. 系统设置 → 隐私与安全性 → 屏幕录制 / 辅助功能 → 给 ToDesk 授权
 4. MBA 上也装一个 ToDesk，输入 M5 Max 的远程 ID + 密码即可控制
 
+![ToDesk 远程控制 — MBA 在控制 M5 Max](docs/screenshots/00b-todesk.png)
+> 截图里能看到："正在被 Sitin彭涛 控制 00:19:03"——MBA 这一头远程接管 M5 Max 已经 19 分钟，整个装机过程都是这样进行的
+
 **坑**：第一次连接时会提示需要给系统授权，按提示退出 ToDesk 重启即可。
 
 ### 0.1 装 Xcode Command Line Tools

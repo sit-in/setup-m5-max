@@ -710,7 +710,7 @@ venv/bin/python main.py --listen 0.0.0.0 --port 8188
 
 | 编号 | 文件 | 状态 |
 |------|------|------|
-| 00b | ToDesk MBA→M5 Max 远程 | ⏳ 待补 |
+| 00b | ToDesk MBA→M5 Max 远程 | ✅ [00b-todesk.png](docs/screenshots/00b-todesk.png) |
 | 02 | Xcode CLT 下载中 | ✅ [02-xcode-clt-installing.png](docs/screenshots/02-xcode-clt-installing.png) |
 | 03 | git clone 输出 | ✅ [03-git-clone.png](docs/screenshots/03-git-clone.png) |
 | 04a | brew 输密码 + 目录清单 | ✅ [04a-homebrew-password.png](docs/screenshots/04a-homebrew-password.png) |
